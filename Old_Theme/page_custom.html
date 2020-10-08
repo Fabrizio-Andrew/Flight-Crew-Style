@@ -1,0 +1,58 @@
+<div class="page-width">
+  <h1 class="small--text-center">{{ page.title }}</h1>
+  {% if page.content != blank %}
+    <div class="content-block">
+      <div class="rte">
+        {{ page.content }}
+      </div>
+    </div>
+  {% endif %}
+  <div class="content-block">
+    <div class="contact-form form-vertical">
+      {% form 'contact' %}
+
+        {% if form.posted_successfully? %}
+          <p class="form-success">
+            Thanks for submitting your custom order.  We'll get back to you shortly with the details.
+          </p>
+        {% endif %}
+
+<!--        __  _
+        \ `/ |
+         \__`!
+         / ,' `-.__________________
+        '-'\_____                LI`-.
+           <____()-=O=O=O=O=O=[]====--)
+             `.___ ,-----,_______...-'
+                  /    .'
+                 /   .'
+                /  .'         Airplane go whoooosh!!
+                `-'                         -->
+
+        {{ form.errors | default_errors }}
+        <input type="hidden" id="Contact Type" name="contact[Type]" value="CUSTOM ORDER"/>
+        <div class="grid grid--half-gutters">
+          <div class="grid__item medium-up--one-half">
+            <label for="ContactFormName" class="label--hidden">{{ 'contact.form.name' | t }}</label>
+            <input type="text" id="ContactFormName" name="contact[{{ 'contact.form.name' | t }}]" placeholder="{{ 'contact.form.name' | t }}" value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+          </div>
+          <div class="grid__item medium-up--one-half">
+            <label for="ContactFormEmail" class="label--hidden">{{ 'contact.form.email' | t }}</label>
+            <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+          </div>
+        </div>
+        <label for="ContactFormPhone" class="label--hidden">{{ 'contact.form.phone' | t }}</label>
+        <input type="tel" id="ContactFormPhone" name="contact[{{ 'contact.form.phone' | t }}]" placeholder="{{ 'contact.form.phone' | t }} (optional)" pattern="[0-9\-]*" value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+        <label for="ContactFormAircraft" class="label--hidden">Aircraft</label>
+        <input type="text" id="ContactFormAircraft" name="contact[Aircraft]" placeholder="Aircraft"/>
+        <label for="ContactFormAirport" class="label--hidden">Airport/City</label>
+        <input type="text" id="ContactFormAirport" name="contact[Airport]" placeholder="Airport/City"/>
+        <label for="ContactFormMessage" class="label--hidden">{{ 'contact.form.message' | t }}</label>
+        <textarea rows="10" id="ContactFormMessage" name="contact[{{ 'contact.form.message' | t }}]" placeholder="Additional Comments/Instructions">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        <input type="submit" class="btn" value="{{ 'contact.form.send' | t }}">
+      {% endform %}
+    </div>
+  </div>
+
+  {% section 'featured-products-subsection' %}
+</div>
