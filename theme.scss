@@ -418,10 +418,18 @@ $class-type: unquote(".");
   padding-left: $gridGutter;
   vertical-align: top;
   @if $mobile-first == true {
-    width: 50%;
+    width: 100%;
   }
   @include box-sizing();
 }
+
+/* Subclass added to support improved mobile grid view on home page */
+#{$class-type}grid__index {
+    @extend #{$class-type}grid__item;
+    @if $mobile-first == true {
+        width: 50%;
+    }
+} 
 
 /*============================================================================
   Reversed grids allow you to structure your source in the opposite

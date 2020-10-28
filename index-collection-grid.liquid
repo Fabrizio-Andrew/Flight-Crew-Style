@@ -33,7 +33,7 @@
         {%- elsif collection.products.first -%}
           {%- assign img_object = collection.products.first.featured_media.preview_image -%}
         {%- endif -%}
-        <div class="grid__item {{ grid_item_width }}" {{ block.shopify_attributes }} >
+        <div class="grid__index {{ grid_item_width }}" {{ block.shopify_attributes }} >
           <div class="collection-grid-item homepage-image {{ section.settings.color }}">
             {%- assign item_link = collection.url | default: '#' -%}
             {%- if block.settings.button_link != blank -%}
